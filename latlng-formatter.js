@@ -74,7 +74,7 @@
 				minutes = ord.minutes * sign; 
 				seconds = ord.seconds * sign;
 
-				dec = degrees + (minutes / 60) + (seconds / 3600);
+				dec = parseInt(degrees) + (minutes / 60) + (seconds / 3600);
 				return dec;
 			} else {
 				return false;
