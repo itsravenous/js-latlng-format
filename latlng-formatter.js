@@ -145,7 +145,7 @@
 		 * @return {bool}
 		 */
 		validateDecimal: function (ord, type) {
-			if (typeof ord != undefined) {
+			if (!isNaN(ord)) {
 				var degMax = type == 'lat' ? 90 : 180;
 				var degMin = -1 * degMax;
 
@@ -162,7 +162,7 @@
 		 * @return {bool}
 		 */
 		validateDMS: function (ord, type) {
-			if (ord.degrees && ord.minutes && ord.seconds ) {
+			if (!isNaN(ord.degrees) && !isNaN(ord.minutes) && !isNaN(ord.seconds)) {
 				var degMax = type == 'lat' ? 90 : 180;
 				var degMin = -1 * degMax;
 
@@ -179,7 +179,7 @@
 		 * @return {bool}
 		 */
 		validateGPS: function (ord, type) {
-			if (ord.degrees && ord.minutes ) {
+			if (!isNaN(ord.degrees) && !isNaN(ord.minutes)) {
 				var degMax = type == 'lat' ? 90 : 180;
 				var degMin = -1 * degMax;
 
