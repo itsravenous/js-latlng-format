@@ -17,7 +17,7 @@
 			if (LatLngFormatter.validateDecimal(ord, type)) {
 				if (ord % 1 === 0) {
 					return {
-						degrees: ord,
+						degrees: parseInt(ord),
 						minutes: 0,
 						seconds: 0
 					};
@@ -48,7 +48,7 @@
 			if (LatLngFormatter.validateDecimal(ord, type)) {
 				if (ord % 1 === 0) {
 					return {
-						degrees: ord,
+						degrees: parseInt(ord),
 						minutes: 0
 					};
 				} else {
@@ -69,12 +69,12 @@
 		 */
 		DMSToDecimal: function (ord, type) {
 			if (LatLngFormatter.validateDMS(ord, type)) {
-				degrees = ord.degrees;
+				var degrees = parseInt(ord.degrees);
 				var sign = (degrees < 0) ? -1: 1;
-				minutes = ord.minutes * sign; 
-				seconds = ord.seconds * sign;
+				var minutes = ord.minutes * sign; 
+				var seconds = ord.seconds * sign;
 
-				dec = parseInt(degrees) + (minutes / 60) + (seconds / 3600);
+				dec = degrees + (minutes / 60) + (seconds / 3600);
 				return dec;
 			} else {
 				return false;
@@ -89,10 +89,11 @@
 		 */
 		DMSToGPS: function (ord, type) {
 			if (LatLngFormatter.validateDMS(ord, type)) {
-				minutes = ord.minutes + ord.seconds / 60; 
+				var degrees = parseInt(ord.degrees)
+				var minutes = parseFloat(ord.minutes) + parseFloat(ord.seconds) / 60; 
 
 				return {
-					degrees: ord.degrees,
+					degrees: degrees,
 					minutes: minutes
 				};
 			} else {
@@ -108,7 +109,7 @@
 		 */
 		GPSToDecimal: function (ord, type) {
 			if (LatLngFormatter.validateGPS(ord, type)) {
-				dmsOrd = LatLngFormatter.GPSToDMS(ord, type);
+				var dmsOrd = LatLngFormatter.GPSToDMS(ord, type);
 				return LatLngFormatter.DMSToDecimal(dmsOrd);
 			} else {
 				return false;
@@ -123,7 +124,7 @@
 		 */
 		 GPSToDMS: function (ord, type) {
 			if (LatLngFormatter.validateGPS(ord, type)) {
-				var degrees = ord.degrees;
+				var degrees = parseInt(ord.degrees);
 				var minutesInt = Math.floor(ord.minutes);
 				var seconds = (ord.minutes - minutesInt) * 60;
 
